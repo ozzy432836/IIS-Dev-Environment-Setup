@@ -1,33 +1,21 @@
+# supply a dir name for your web application
+# supply the actual dir of your web app
+# this script creates an app pool, an iis site, binds the domain to the site and creates a hosts file entry
+# if you follow my naming convention then on your local machine, your app dir is named like so:
+# subdomain-dev.domain.com
+# e.g. www-dev.example.com
+# the pattern being that durind the deployment pipeline, we can follow the naming convention like so:
+# test:    www-tst.example.com
+# staging: www-sta.example.com
+# live:    www.example.com
+# this works nicely for any other subdomains too e.g.
+# api.example.com, api-dev.example.com, api-tst.example.com, api-sta.example.com
 param(
     [string]$base = "D:\all\Code\Mine", 
-    [string]$proj = "www.bestest.com"
+    [string]$proj = "www-dev.bestest.com"
 )
 
-
-#Main -baseDir $base -projName $proj
-
-Function Main12345([string]$baseDir, [string]$projName) {
-
-    #$baseDir = Read-Host "Enter your project dir (this could look like this: C:\inetpub\wwwroot)"
-    #$projName = Read-Host "Enter your project name (this should look like this subdomain-env.domain.com)"
-    # validate params...
-    
-    $newProject = [Project]::New()
-    $newProject.Name = $projName
-    $newProject.IISAppPoolName = $newProject.Name
-    $newProject.IISSiteName = $newProject.Name
-    #$newProject.IISBindings = "*:8002:localhost"
-    $newProject.IISBindings = "*:80:$($newProject.Name)"
-    $newProject.IISPath = "$($baseDir)\$($newProject.Name)"
-
-    Create-IIS-SiteDir -dirName $newProject.IISPath
-    Create-IIS-AppPool -project $newProject
-    Create-IIS-Site -project $newProject
-    Add-Hosts-File-Entry -hostname $newProject.Name
-
-}
-
-Function Create-IIS-SiteDir($dirName) 
+function Create-IIS-SiteDir($dirName) 
 {
     echo "Creating Directory $($dirName)"
 
@@ -118,15 +106,16 @@ Class Project
     [String] $IISPath = ""
 }
 
-    $newProject = [Project]::New()
-    $newProject.Name = $proj
-    $newProject.IISAppPoolName = $newProject.Name
-    $newProject.IISSiteName = $newProject.Name
-    #$newProject.IISBindings = "*:8002:localhost"
-    $newProject.IISBindings = "*:80:$($newProject.Name)"
-    $newProject.IISPath = "$($base)\$($newProject.Name)"
+# Main
+$newProject = [Project]::New()
+$newProject.Name = $proj
+$newProject.IISAppPoolName = $newProject.Name
+$newProject.IISSiteName = $newProject.Name
+#$newProject.IISBindings = "*:8002:localhost"
+$newProject.IISBindings = "*:80:$($newProject.Name)"
+$newProject.IISPath = "$($base)\$($newProject.Name)"
 
-    Create-IIS-SiteDir -dirName $newProject.IISPath
-    Create-IIS-AppPool -project $newProject
-    Create-IIS-Site -project $newProject
-    Add-Hosts-File-Entry -hostname $newProject.Name
+Create-IIS-SiteDir -dirName $newProject.IISPath
+Create-IIS-AppPool -project $newProject
+Create-IIS-Site -project $newProject
+Add-Hosts-File-Entry -hostname $newProject.Name
