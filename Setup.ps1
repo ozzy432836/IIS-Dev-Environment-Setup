@@ -4,7 +4,7 @@
 # if you follow my naming convention then on your local machine, your app dir is named like so:
 # subdomain-dev.domain.com
 # e.g. www-dev.example.com
-# the pattern being that during the deployment pipeline, we can follow the naming convention like so:
+# the pattern being that durind the deployment pipeline, we can follow the naming convention like so:
 # test:    www-tst.example.com
 # staging: www-sta.example.com
 # live:    www.example.com
@@ -12,7 +12,7 @@
 # api.example.com, api-dev.example.com, api-tst.example.com, api-sta.example.com
 param(
     [string]$base = "D:\all\Code\Mine", 
-    [string]$proj = "www-dev.bestest.com"
+    [string]$proj = "www-dev.bestest.comwwwww"
 )
 
 function Create-IIS-SiteDir($dirName) 
@@ -56,8 +56,8 @@ function Create-IIS-Site($project)
     else 
     {
         Start-IISCommitDelay
-        $NewSite = New-IISSite -Name $project.IISSiteName -BindingInformation $project.IISBindings ‚ÄìPhysicalPath $project.IISPath -Passthru
-        $NewSite.Applications[‚Äú/‚Äù].ApplicationPoolName = $project.IISAppPoolName
+        $NewSite = New-IISSite -Name $project.IISSiteName -BindingInformation $project.IISBindings ñPhysicalPath $project.IISPath -Passthru
+        $NewSite.Applications[ì/î].ApplicationPoolName = $project.IISAppPoolName
         Stop-IISCommitDelay
         
         echo "Site Created: $($project.IISSiteName)"
