@@ -30,6 +30,11 @@ function Create-IIS-SiteDir($dirName)
     }
 }
 
+function Create-Default-SiteFile($siteDir) 
+{
+    New-Item "$siteDir\index.html" -ItemType "File"
+}
+
 function Create-IIS-AppPool($project) 
 {
     echo "Creating Application Pool $($project.IISAppPoolName)"
@@ -114,8 +119,12 @@ $newProject.IISSiteName = $newProject.Name
 #$newProject.IISBindings = "*:8002:localhost"
 $newProject.IISBindings = "*:80:$($newProject.Name)"
 $newProject.IISPath = "$($base)\$($newProject.Name)"
+# Git init dir
+# Git create remote repo
+# Git add remote repo
 
 Create-IIS-SiteDir -dirName $newProject.IISPath
+Create-Default-SiteFile -siteDir $newProject.IISPath
 Create-IIS-AppPool -project $newProject
 Create-IIS-Site -project $newProject
 Add-Hosts-File-Entry -hostname $newProject.Name
