@@ -13,9 +13,11 @@
 # api.example.com, api-dev.example.com, api-tst.example.com, api-sta.example.com
 
 ##### TODO ####
-# 1. create similar function to Remove-Hosts-File-Entry to check if entry exists rather than delete and re-add
+# 1.0. create similar function to Remove-Hosts-File-Entry to check if entry exists rather than delete and re-add
+# 1.1. open a browser window to browse the new site on localhost
+# 1.2. add some text to index.html file so at least something shows when you browse to the site
 
-# 2. Initialise new project with Git? (commands below)
+# 2.0. Initialise new project with Git? (commands below)
 ## Git init web site dir (if not already done)
 ## Git create remote repo
 ## Git add remote repo
