@@ -1,7 +1,5 @@
-Open powershell as admin and run this from prompt
--base is the directory in which your project lives in
--projName is the actual folder for your www-root
--projUrl is the url you will use to access your proj
-
-RUN THIS:
-.\Setup.ps1 -base "F:\Code\Presentation-Layer" -projName "Bestest" -projUrl "the-best.com"
+- Edit setup.bat
+- Change base to
+- base "F:\MacriumWebsite" -projName "MacriumWebsite" -projUrl 
+- Example for the above would be for a project that the web server would be expected to statup in F:\MacriumWebsite\MacriumWebsite
+- Right click setup.bat and run as administrator
